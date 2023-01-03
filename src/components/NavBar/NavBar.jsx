@@ -13,19 +13,19 @@ const NavBar = () => {
     return (
         <NavBarWrapper>
             <NavBarLogo
-                link='/'
-                src='/assets/img/rr-logo.svg'
-                label='React Router v5'
+                link="/"
+                src="/assets/img/rr-logo.svg"
+                label="React Router v5"
             />
             <NavBarLinkList>
                 {isLoggedIn ? (
                     <>
-                        <StyledNavLink to='/some'>Something</StyledNavLink>
-                        <StyledNavLink to='/posts'>Posts</StyledNavLink>
+                        <StyledNavLink to="/some">Something</StyledNavLink>
+                        <StyledNavLink to="/posts">Posts</StyledNavLink>
                         <NavBarDropdown />
                     </>
                 ) : (
-                    <StyledNavLink to='/auth' styleType='button'>
+                    <StyledNavLink to="/auth/signup" styleType="button">
                         SignUp
                     </StyledNavLink>
                 )}
