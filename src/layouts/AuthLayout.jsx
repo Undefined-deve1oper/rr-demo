@@ -4,6 +4,7 @@ import { isLoggedInSelector } from "../store/authSlice";
 import { Navigate, Outlet } from "react-router-dom";
 // Components
 import Card from "../components/Card";
+import { useSelector } from "react-redux";
 // Store
 
 const AuthLayout = () => {
