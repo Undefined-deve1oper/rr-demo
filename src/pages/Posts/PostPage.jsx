@@ -1,7 +1,7 @@
 import React from "react";
 // Librares
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 // Store
 import { loadingStatusSelector, postSelector } from "../../store/postsSlice";
 // Components
@@ -17,32 +17,36 @@ const PostPage = () => {
     const loadingStatus = useSelector(loadingStatusSelector());
     const post = useSelector(postSelector(postId));
 
+    if (loadingStatus === "succeeded" && !post) {
+        return <Navigate to="/posts" />;
+    }
+
     return (
         <>
-            <div className='max-w-8xl mx-auto'>
-                <div className='flex px-4 pt-8 pb-10 lg:px-8 '>
-                    <StyledNavLink to='/posts' styleType='withIcon'>
-                        <ChevronLeftIcon className='h-6' />
+            <div className="max-w-8xl mx-auto">
+                <div className="flex px-4 pt-8 pb-10 lg:px-8 ">
+                    <StyledNavLink to="/posts" styleType="withIcon">
+                        <ChevronLeftIcon className="h-6" />
                         Go back
                     </StyledNavLink>
                 </div>
             </div>
-            <div className='px-4 sm:px-6 md:px-9'>
-                <div className='max-w-3xl mx-auto pb-28'>
+            <div className="px-4 sm:px-6 md:px-9">
+                <div className="max-w-3xl mx-auto pb-28">
                     <main>
                         {loadingStatus === "pending" && (
-                            <div className='text-center'>
+                            <div className="text-center">
                                 <SpinnerLader />
                             </div>
                         )}
                         {post && (
-                            <article className='relative pt-10'>
-                                <h1 className='text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-200 md:text-3xl '>
+                            <article className="relative pt-10">
+                                <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-200 md:text-3xl ">
                                     {post.attributes.title}
                                 </h1>
-                                <div className='text-sm leading-6'>
+                                <div className="text-sm leading-6">
                                     <dl>
-                                        <dd className='absolute top-0 inset-x-0 text-slate-700 dark:text-slate-400'>
+                                        <dd className="absolute top-0 inset-x-0 text-slate-700 dark:text-slate-400">
                                             <DateDisplay
                                                 value={
                                                     post.attributes[
@@ -53,7 +57,7 @@ const PostPage = () => {
                                         </dd>
                                     </dl>
                                 </div>
-                                <div className='mt-6 prose prose-slate max-w-none'>
+                                <div className="mt-6 prose prose-slate max-w-none">
                                     {post.attributes.content
                                         .split("||")
                                         .map((part, index) => (
