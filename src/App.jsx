@@ -12,6 +12,7 @@ import NavBar from "./components/NavBar/NavBar";
 import withRedux from "./hoc/withRedux";
 import withRouter from "./hoc/withRouter";
 import "react-toastify/dist/ReactToastify.css";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
     return (
@@ -25,7 +26,10 @@ function App() {
                     <Route path={"signup"} element={<SignUpPage />} />
                     <Route path="*" element={<Navigate to="/auth/signup" />} />
                 </Route>
-                <Route path="posts" element={<PostsLayout />}>
+                <Route
+                    path="posts"
+                    element={<ProtectedRoute element={<PostsLayout />} />}
+                >
                     <Route index element={<PostsListPage />} />
                     <Route path={":postId"} element={<PostPage />} />
                 </Route>
